@@ -2,7 +2,7 @@
 
 A developer-only form autofill helper that intelligently detects form fields and allows single-click full form autofill. Powered by `@faker-js/faker`.
 
-[**Read Full Documentation →**](https://your-docs-site.com)
+[**Read Full Documentation →**](https://aravindh-mb.github.io/flash-fill-dev/)
 
 ## Features
 
