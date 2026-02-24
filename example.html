@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Fill — World-Class Complex Form Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --surface2: #22263a;
+            --border: #2e3249;
+            --accent: #6366f1;
+            --accent2: #8b5cf6;
+            --text: #e2e8f0;
+            --muted: #64748b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warn: #f59e0b;
+            --radius: 10px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #a78bfa;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1.5rem auto 0;
+            max-width: 600px;
+        }
+
+        .progress-step {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            border-radius: 999px;
+            transition: background 0.4s;
+        }
+
+        .progress-step.active {
+            background: var(--accent);
+        }
+
+        .progress-step.done {
+            background: var(--success);
+        }
+
+        .form-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 0.1rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 680px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #94a3b8;
+            letter-spacing: 0.02em;
+        }
+
+        label .required {
+            color: var(--danger);
+            margin-left: 2px;
+        }
+
+        input,
+        textarea,
+        select {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: var(--radius);
+            padding: 0.6rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        input[type="color"] {
+            height: 42px;
+            padding: 0.3rem;
+            cursor: pointer;
+        }
+
+        input[type="range"] {
+            padding: 0;
+            background: transparent;
+        }
+
+        select option {
+            background: var(--surface2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .range-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .range-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .range-val {
+            min-width: 42px;
+            text-align: center;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .check-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.45rem 0.8rem;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .check-item:has(input:checked),
+        .radio-item:has(input:checked) {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+            padding: 0;
+        }
+
+        .file-drop {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .file-drop:hover {
+            border-color: var(--accent);
+        }
+
+        .field-hint {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        .separator {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1.25rem 0;
+        }
+
+        .sub-section {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .sub-section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tag-input-wrap {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.4rem 0.6rem;
+            min-height: 44px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            cursor: text;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 4px;
+            padding: 0.15rem 0.5rem;
+            font-size: 0.78rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .summary-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .summary-stat {
+            text-align: center;
+        }
+
+        .summary-stat .num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .summary-stat .lbl {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .submit-area {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .star {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--border);
+            transition: color 0.15s;
+        }
+
+        .star.active {
+            color: var(--warn);
+        }
+
+        input[type="hidden"] {
+            display: none;
+        }
+
+        .tip {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            font-size: 0.82rem;
+            color: #a78bfa;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <div class="badge">⚡ Flash Fill Demo</div>
+        <h1>World-Class Complex Form</h1>
+        <p>Every field type imaginable — click ⚡ bottom-right to auto-fill everything instantly</p>
+        <div class="progress-bar" id="progress-bar">
+            <div class="progress-step active" id="ps1"></div>
+            <div class="progress-step" id="ps2"></div>
+            <div class="progress-step" id="ps3"></div>
+            <div class="progress-step" id="ps4"></div>
+            <div class="progress-step" id="ps5"></div>
+            <div class="progress-step" id="ps6"></div>
+            <div class="progress-step" id="ps7"></div>
+            <div class="progress-step" id="ps8"></div>
+        </div>
+    </div>
+
+    <div class="form-wrapper">
+        <div class="tip">💡 Press <strong>Ctrl+Shift+F</strong> or click the <strong>⚡ button</strong> (bottom-right) to
+            instantly fill all fields with realistic fake data.</div>
+
+        <div class="summary-bar">
+            <div class="summary-stat">
+                <div class="num" id="total-fields">0</div>
+                <div class="lbl">Total Fields</div>
+            </div>
+            <div class="summary-stat">
+                <div class="num" id="filled-fields">0</div>
+                <div class="lbl">Filled</div>
+            </div>
+            <div class="summary-stat">
+                <div class="num" id="field-types">12</div>
+                <div class="lbl">Field Types</div>
+            </div>
+            <div class="summary-stat">
+                <div class="num" id="sections-count">8</div>
+                <div class="lbl">Sections</div>
+            </div>
+        </div>
+
+        <form id="mega-form" autocomplete="off">
+
+            <!-- SECTION 1: Personal Identity -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">👤</div>
+                    <div>
+                        <div class="section-title">Personal Identity</div>
+                        <div class="section-subtitle">Basic personal information</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-4" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Prefix</label>
+                        <select name="prefix" id="prefix">
+                            <option value="">Select</option>
+                            <option>Mr.</option>
+                            <option>Ms.</option>
+                            <option>Mrs.</option>
+                            <option>Dr.</option>
+                            <option>Prof.</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>First Name <span class="required">*</span></label>
+                        <input type="text" name="firstname" id="firstname" placeholder="John">
+                    </div>
+                    <div class="field">
+                        <label>Middle Name</label>
+                        <input type="text" name="middlename" id="middlename" placeholder="Paul">
+                    </div>
+                    <div class="field">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input type="text" name="lastname" id="lastname" placeholder="Doe">
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Date of Birth <span class="required">*</span></label>
+                        <input type="date" name="dob" id="dob">
+                    </div>
+                    <div class="field">
+                        <label>Age</label>
+                        <input type="number" name="age" id="age" min="1" max="120" placeholder="25">
+                    </div>
+                    <div class="field">
+                        <label>Nationality</label>
+                        <select name="nationality" id="nationality">
+                            <option value="">Select country</option>
+                            <option value="IN">Indian</option>
+                            <option value="US">American</option>
+                            <option value="UK">British</option>
+                            <option value="CA">Canadian</option>
+                            <option value="AU">Australian</option>
+                            <option value="DE">German</option>
+                            <option value="FR">French</option>
+                            <option value="JP">Japanese</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom: 1rem;">
+                    <div class="field">
+                        <label>Gender <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="gender" value="male"> Male</label>
+                            <label class="radio-item"><input type="radio" name="gender" value="female"> Female</label>
+                            <label class="radio-item"><input type="radio" name="gender" value="non-binary">
+                                Non-binary</label>
+                            <label class="radio-item"><input type="radio" name="gender" value="prefer-not"> Prefer not
+                                to say</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Marital Status</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="marital_status" value="single">
+                                Single</label>
+                            <label class="radio-item"><input type="radio" name="marital_status" value="married">
+                                Married</label>
+                            <label class="radio-item"><input type="radio" name="marital_status" value="divorced">
+                                Divorced</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="field">
+                        <label>Blood Group</label>
+                        <select name="blood_group" id="blood_group">
+                            <option value="">Select</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Ethnicity</label>
+                        <select name="ethnicity" id="ethnicity">
+                            <option value="">Prefer not to say</option>
+                            <option value="asian">Asian</option>
+                            <option value="black">Black/African</option>
+                            <option value="hispanic">Hispanic/Latino</option>
+                            <option value="white">White/Caucasian</option>
+                            <option value="mixed">Mixed</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Preferred Language</label>
+                        <select name="language" id="language">
+                            <option value="">Select</option>
+                            <option value="en">English</option>
+                            <option value="ta">Tamil</option>
+                            <option value="hi">Hindi</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="es">Spanish</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Contact Information -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">📞</div>
+                    <div>
+                        <div class="section-title">Contact Information</div>
+                        <div class="section-subtitle">How we can reach you</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" name="email" id="email" placeholder="john@example.com">
+                    </div>
+                    <div class="field">
+                        <label>Alternate Email</label>
+                        <input type="email" name="alternate_email" id="alternate_email" placeholder="backup@mail.com">
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Phone (Primary) <span class="required">*</span></label>
+                        <input type="tel" name="phone" id="phone" placeholder="+91 98765 43210">
+                    </div>
+                    <div class="field">
+                        <label>Phone (Secondary)</label>
+                        <input type="tel" name="mobile" id="mobile" placeholder="+91 98765 00000">
+                    </div>
+                    <div class="field">
+                        <label>Fax Number</label>
+                        <input type="tel" name="fax" id="fax" placeholder="+91 44 2345 6789">
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Website / Portfolio</label>
+                        <input type="url" name="website" id="website" placeholder="https://yoursite.com">
+                    </div>
+                    <div class="field">
+                        <label>LinkedIn Profile</label>
+                        <input type="url" name="linkedin" id="linkedin" placeholder="https://linkedin.com/in/...">
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="field">
+                        <label>GitHub</label>
+                        <input type="url" name="github" id="github" placeholder="https://github.com/...">
+                    </div>
+                    <div class="field">
+                        <label>Twitter / X</label>
+                        <input type="url" name="twitter" id="twitter" placeholder="https://twitter.com/...">
+                    </div>
+                    <div class="field">
+                        <label>Instagram Handle</label>
+                        <input type="text" name="instagram" id="instagram" placeholder="@username">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Address -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🏠</div>
+                    <div>
+                        <div class="section-title">Address Details</div>
+                        <div class="section-subtitle">Current and permanent addresses</div>
+                    </div>
+                </div>
+
+                <div class="sub-section" style="margin-bottom:1rem">
+                    <div class="sub-section-title">Current Address</div>
+                    <div class="grid grid-2" style="margin-bottom:0.75rem">
+                        <div class="field">
+                            <label>Street Address 1 <span class="required">*</span></label>
+                            <input type="text" name="address1" id="address1" placeholder="123 Main St">
+                        </div>
+                        <div class="field">
+                            <label>Street Address 2</label>
+                            <input type="text" name="address2" id="address2" placeholder="Apt / Suite / Floor">
+                        </div>
+                    </div>
+                    <div class="grid grid-4">
+                        <div class="field">
+                            <label>City <span class="required">*</span></label>
+                            <input type="text" name="city" id="city" placeholder="Chennai">
+                        </div>
+                        <div class="field">
+                            <label>State / Province</label>
+                            <input type="text" name="state" id="state" placeholder="Tamil Nadu">
+                        </div>
+                        <div class="field">
+                            <label>ZIP / PIN Code <span class="required">*</span></label>
+                            <input type="text" name="pincode" id="pincode" placeholder="600001">
+                        </div>
+                        <div class="field">
+                            <label>Country <span class="required">*</span></label>
+                            <select name="country" id="country">
+                                <option value="">Select</option>
+                                <option value="IN">India</option>
+                                <option value="US">United States</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                                <option value="AU">Australia</option>
+                                <option value="SG">Singapore</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="AE">UAE</option>
+                                <option value="JP">Japan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field" style="margin-bottom:1rem">
+                    <label class="check-item" style="display:inline-flex">
+                        <input type="checkbox" name="same_address" id="same_address"> Same as current address
+                        (Permanent)
+                    </label>
+                </div>
+
+                <div class="sub-section">
+                    <div class="sub-section-title">Permanent Address</div>
+                    <div class="grid grid-2" style="margin-bottom:0.75rem">
+                        <div class="field">
+                            <label>Street Address 1</label>
+                            <input type="text" name="perm_address1" id="perm_address1" placeholder="456 Oak Ave">
+                        </div>
+                        <div class="field">
+                            <label>Street Address 2</label>
+                            <input type="text" name="perm_address2" id="perm_address2" placeholder="Suite 200">
+                        </div>
+                    </div>
+                    <div class="grid grid-4">
+                        <input type="text" name="perm_city" id="perm_city" placeholder="City" aria-label="city">
+                        <input type="text" name="perm_state" id="perm_state" placeholder="State" aria-label="state">
+                        <input type="text" name="perm_pincode" id="perm_pincode" placeholder="ZIP" aria-label="zip">
+                        <select name="perm_country" id="perm_country">
+                            <option value="">Country</option>
+                            <option value="IN">India</option>
+                            <option value="US">United States</option>
+                            <option value="GB">UK</option>
+                            <option value="CA">Canada</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: Professional Information -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">💼</div>
+                    <div>
+                        <div class="section-title">Professional Information</div>
+                        <div class="section-subtitle">Employment and career details</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Current Company</label>
+                        <input type="text" name="company" id="company" placeholder="Acme Corp">
+                    </div>
+                    <div class="field">
+                        <label>Job Title / Designation</label>
+                        <input type="text" name="jobtitle" id="jobtitle" placeholder="Senior Engineer">
+                    </div>
+                    <div class="field">
+                        <label>Department</label>
+                        <input type="text" name="department" id="department" placeholder="Engineering">
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Industry / Sector</label>
+                        <select name="industry" id="industry">
+                            <option value="">Select Industry</option>
+                            <option>Information Technology</option>
+                            <option>Finance & Banking</option>
+                            <option>Healthcare</option>
+                            <option>Education</option>
+                            <option>Manufacturing</option>
+                            <option>Retail & E-Commerce</option>
+                            <option>Media & Entertainment</option>
+                            <option>Government</option>
+                            <option>Consulting</option>
+                            <option>Real Estate</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Years of Experience</label>
+                        <input type="number" name="experience" id="experience" min="0" max="50" placeholder="5">
+                    </div>
+                    <div class="field">
+                        <label>Employee ID</label>
+                        <input type="text" name="empid" id="empid" placeholder="EMP1234">
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Annual Salary (₹)</label>
+                        <input type="number" name="salary" id="salary" placeholder="1200000" min="0">
+                    </div>
+                    <div class="field">
+                        <label>Expected CTC (₹)</label>
+                        <input type="number" name="ctc" id="ctc" placeholder="1500000" min="0">
+                    </div>
+                </div>
+
+                <div class="field" style="margin-bottom:1rem">
+                    <label>Work Mode Preference</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="work_mode" value="remote"> 🏠 Remote</label>
+                        <label class="radio-item"><input type="radio" name="work_mode" value="hybrid"> ⚡ Hybrid</label>
+                        <label class="radio-item"><input type="radio" name="work_mode" value="onsite"> 🏢
+                            On-site</label>
+                        <label class="radio-item"><input type="radio" name="work_mode" value="flexible"> 🌍
+                            Flexible</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Key Skills (comma separated)</label>
+                    <input type="text" name="skills" id="skills" placeholder="React, Node.js, Python, AWS...">
+                </div>
+            </div>
+
+            <!-- SECTION 5: Education -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🎓</div>
+                    <div>
+                        <div class="section-title">Education Background</div>
+                        <div class="section-subtitle">Academic qualifications</div>
+                    </div>
+                </div>
+
+                <div class="sub-section" style="margin-bottom:1rem">
+                    <div class="sub-section-title">Highest Qualification</div>
+                    <div class="grid grid-2" style="margin-bottom:0.75rem">
+                        <div class="field">
+                            <label>Degree / Certificate</label>
+                            <select name="degree" id="degree">
+                                <option value="">Select</option>
+                                <option>High School Diploma</option>
+                                <option>Bachelor's Degree</option>
+                                <option>Master's Degree</option>
+                                <option>PhD / Doctorate</option>
+                                <option>MBA</option>
+                                <option>Associate Degree</option>
+                                <option>Professional Certification</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Field of Study / Major</label>
+                            <input type="text" name="major" id="major" placeholder="Computer Science">
+                        </div>
+                    </div>
+                    <div class="grid grid-3">
+                        <div class="field">
+                            <label>University / Institution</label>
+                            <input type="text" name="university" id="university" placeholder="MIT">
+                        </div>
+                        <div class="field">
+                            <label>CGPA / GPA</label>
+                            <input type="number" name="gpa" id="gpa" min="0" max="10" step="0.1" placeholder="8.5">
+                        </div>
+                        <div class="field">
+                            <label>Graduation Year</label>
+                            <input type="number" name="grad_year" id="grad_year" min="1970" max="2030"
+                                placeholder="2020">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Certifications / Awards</label>
+                    <textarea name="certifications" id="certifications"
+                        placeholder="AWS Certified Developer, Google Cloud Professional..."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 6: Financial & Account -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🏦</div>
+                    <div>
+                        <div class="section-title">Financial & Account Details</div>
+                        <div class="section-subtitle">Sensitive payment information</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Username</label>
+                        <input type="text" name="username" id="username" placeholder="johnsmith92">
+                    </div>
+                    <div class="field">
+                        <label>Password <span class="required">*</span></label>
+                        <input type="password" name="password" id="password" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="field" style="margin-bottom:1rem">
+                    <label>Confirm Password <span class="required">*</span></label>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="••••••••">
+                </div>
+
+                <hr class="separator">
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Credit Card Number</label>
+                        <input type="text" name="cardnumber" id="cardnumber" placeholder="4234 5678 9012 3456"
+                            maxlength="19">
+                    </div>
+                    <div class="field">
+                        <label>Card Expiry (MM/YY)</label>
+                        <input type="text" name="cardexpiry" id="cardexpiry" placeholder="12/27" maxlength="5">
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>CVV</label>
+                        <input type="text" name="cvv" id="cvv" placeholder="123" maxlength="4">
+                    </div>
+                    <div class="field">
+                        <label>Card Holder Name</label>
+                        <input type="text" name="cardholder_name" id="cardholder_name" placeholder="JOHN P DOE">
+                    </div>
+                    <div class="field">
+                        <label>Card Type</label>
+                        <select name="card_type" id="card_type">
+                            <option value="">Select</option>
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="amex">American Express</option>
+                            <option value="discover">Discover</option>
+                            <option value="rupay">RuPay</option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr class="separator">
+
+                <div class="grid grid-3">
+                    <div class="field">
+                        <label>Bank Account Number</label>
+                        <input type="text" name="accountnumber" id="accountnumber" placeholder="123456789012">
+                    </div>
+                    <div class="field">
+                        <label>IFSC / SWIFT Code</label>
+                        <input type="text" name="ifsc" id="ifsc" placeholder="HDFC0001234">
+                    </div>
+                    <div class="field">
+                        <label>IBAN</label>
+                        <input type="text" name="iban" id="iban" placeholder="GB29 NWBK 6016 1331 9268 19">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 7: Documents & Identity -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🪪</div>
+                    <div>
+                        <div class="section-title">Documents & Identity</div>
+                        <div class="section-subtitle">Government ID and verification</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Passport Number</label>
+                        <input type="text" name="passport" id="passport" placeholder="P1234567">
+                    </div>
+                    <div class="field">
+                        <label>National ID / SSN</label>
+                        <input type="text" name="ssn" id="ssn" placeholder="123-45-6789">
+                    </div>
+                    <div class="field">
+                        <label>Tax ID / PAN</label>
+                        <input type="text" name="tax_id" id="tax_id" placeholder="ABCDE1234F">
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Driving Licence Number</label>
+                        <input type="text" name="driving_licence" id="driving_licence" placeholder="DL-XXXXXXXXXX">
+                    </div>
+                    <div class="field">
+                        <label>Passport Issue Date</label>
+                        <input type="date" name="passport_issue" id="passport_issue">
+                    </div>
+                    <div class="field">
+                        <label>Passport Expiry Date</label>
+                        <input type="date" name="passport_expiry" id="passport_expiry">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Upload Supporting Document</label>
+                    <div class="file-drop" onclick="document.getElementById('doc_upload').click()">
+                        📄 Drag & drop or click to select file<br>
+                        <small style="color:var(--muted);margin-top:4px;display:block">PDF, JPG, PNG — max 5MB</small>
+                        <input type="file" id="doc_upload" name="document" accept=".pdf,.jpg,.png" style="display:none">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 8: Preferences & Health -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">⚙️</div>
+                    <div>
+                        <div class="section-title">Preferences, Health & More</div>
+                        <div class="section-subtitle">Customize your experience</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Preferred Theme</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="theme" value="dark"> 🌙 Dark</label>
+                            <label class="radio-item"><input type="radio" name="theme" value="light"> ☀️ Light</label>
+                            <label class="radio-item"><input type="radio" name="theme" value="system"> 💻 System</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Notification Preference</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="notif_pref" value="all"> All</label>
+                            <label class="radio-item"><input type="radio" name="notif_pref" value="important">
+                                Important</label>
+                            <label class="radio-item"><input type="radio" name="notif_pref" value="none"> None</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field" style="margin-bottom:1rem">
+                    <label>Interests (select all that apply)</label>
+                    <div class="checkbox-group">
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="tech"> 💻
+                            Technology</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="design"> 🎨
+                            Design</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="finance"> 📈
+                            Finance</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="health"> 🏃
+                            Health</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="travel"> ✈️
+                            Travel</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="food"> 🍕 Food</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="music"> 🎵
+                            Music</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="gaming"> 🎮
+                            Gaming</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="reading"> 📚
+                            Reading</label>
+                        <label class="check-item"><input type="checkbox" name="interest[]" value="sports"> ⚽
+                            Sports</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field range-wrap">
+                        <label>Proficiency: JavaScript (1-100)</label>
+                        <div class="range-row">
+                            <input type="range" name="skill_js" id="skill_js" min="0" max="100" value="50"
+                                oninput="document.getElementById('v_skill_js').textContent=this.value">
+                            <div class="range-val" id="v_skill_js">50</div>
+                        </div>
+                    </div>
+                    <div class="field range-wrap">
+                        <label>Proficiency: Python (1-100)</label>
+                        <div class="range-row">
+                            <input type="range" name="skill_py" id="skill_py" min="0" max="100" value="50"
+                                oninput="document.getElementById('v_skill_py').textContent=this.value">
+                            <div class="range-val" id="v_skill_py">50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field range-wrap">
+                        <label>Communication Skills</label>
+                        <div class="range-row">
+                            <input type="range" name="skill_comm" id="skill_comm" min="0" max="10" value="5"
+                                oninput="document.getElementById('v_comm').textContent=this.value">
+                            <div class="range-val" id="v_comm">5</div>
+                        </div>
+                    </div>
+                    <div class="field range-wrap">
+                        <label>Leadership Skills</label>
+                        <div class="range-row">
+                            <input type="range" name="skill_lead" id="skill_lead" min="0" max="10" value="5"
+                                oninput="document.getElementById('v_lead').textContent=this.value">
+                            <div class="range-val" id="v_lead">5</div>
+                        </div>
+                    </div>
+                    <div class="field range-wrap">
+                        <label>Teamwork</label>
+                        <div class="range-row">
+                            <input type="range" name="skill_team" id="skill_team" min="0" max="10" value="5"
+                                oninput="document.getElementById('v_team').textContent=this.value">
+                            <div class="range-val" id="v_team">5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-3" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Favorite Color</label>
+                        <input type="color" name="fav_color" id="fav_color" value="#6366f1">
+                    </div>
+                    <div class="field">
+                        <label>Availability Date</label>
+                        <input type="date" name="availability_date" id="availability_date">
+                    </div>
+                    <div class="field">
+                        <label>Preferred Meeting Time</label>
+                        <input type="time" name="meeting_time" id="meeting_time">
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-bottom:1rem">
+                    <div class="field">
+                        <label>Interview Slot</label>
+                        <input type="datetime-local" name="interview_slot" id="interview_slot">
+                    </div>
+                    <div class="field">
+                        <label>Notice Period (days)</label>
+                        <input type="number" name="notice_period" id="notice_period" min="0" max="180" placeholder="30">
+                    </div>
+                </div>
+
+                <hr class="separator">
+
+                <div class="sub-section" style="margin-bottom:1rem">
+                    <div class="sub-section-title">Health Information</div>
+                    <div class="grid grid-3">
+                        <div class="field">
+                            <label>Height (cm)</label>
+                            <input type="number" name="height" id="height" min="50" max="250" placeholder="175">
+                        </div>
+                        <div class="field">
+                            <label>Weight (kg)</label>
+                            <input type="number" name="weight" id="weight" min="10" max="300" placeholder="70">
+                        </div>
+                        <div class="field">
+                            <label>Dietary Preference</label>
+                            <select name="diet" id="diet">
+                                <option value="">Select</option>
+                                <option value="veg">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="non-veg">Non-Vegetarian</option>
+                                <option value="pescatarian">Pescatarian</option>
+                                <option value="halal">Halal</option>
+                                <option value="kosher">Kosher</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field" style="margin-top:0.75rem">
+                        <label>Known Allergies / Medical Conditions</label>
+                        <textarea name="allergies" id="allergies"
+                            placeholder="Peanuts, Penicillin, Dust mites..."></textarea>
+                    </div>
+                </div>
+
+                <hr class="separator">
+
+                <div class="sub-section">
+                    <div class="sub-section-title">Emergency Contact</div>
+                    <div class="grid grid-3">
+                        <div class="field">
+                            <label>Emergency Contact Name</label>
+                            <input type="text" name="emergency_name" id="emergency_name" placeholder="Jane Doe">
+                        </div>
+                        <div class="field">
+                            <label>Relationship</label>
+                            <select name="emergency_relation" id="emergency_relation">
+                                <option value="">Select</option>
+                                <option value="spouse">Spouse</option>
+                                <option value="parent">Parent</option>
+                                <option value="sibling">Sibling</option>
+                                <option value="friend">Friend</option>
+                                <option value="colleague">Colleague</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Emergency Phone</label>
+                            <input type="tel" name="emergency_phone" id="emergency_phone" placeholder="+91 99999 00000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 9: Review & Submit -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">✅</div>
+                    <div>
+                        <div class="section-title">Review & Submit</div>
+                        <div class="section-subtitle">Final confirmation before submission</div>
+                    </div>
+                </div>
+
+                <div class="field" style="margin-bottom: 1rem;">
+                    <label>Overall Satisfaction Rating</label>
+                    <div class="star-rating" id="star-rating">
+                        <span class="star" data-v="1">★</span>
+                        <span class="star" data-v="2">★</span>
+                        <span class="star" data-v="3">★</span>
+                        <span class="star" data-v="4">★</span>
+                        <span class="star" data-v="5">★</span>
+                    </div>
+                    <input type="hidden" name="rating" id="rating" value="">
+                </div>
+
+                <div class="field" style="margin-bottom:1rem">
+                    <label>Additional Notes / Comments</label>
+                    <textarea name="notes" id="notes" rows="4"
+                        placeholder="Any additional information you'd like to share..."></textarea>
+                </div>
+
+                <div class="field" style="margin-bottom:1rem">
+                    <label>Referral Code (if any)</label>
+                    <input type="text" name="referral_code" id="referral_code" placeholder="FLASHFILL2025">
+                </div>
+
+                <div class="field" style="margin-bottom:1rem">
+                    <label>How did you hear about us?</label>
+                    <select name="source" id="source">
+                        <option value="">Select source</option>
+                        <option value="google">Google Search</option>
+                        <option value="social">Social Media</option>
+                        <option value="friend">Friend / Colleague</option>
+                        <option value="ad">Advertisement</option>
+                        <option value="email">Email</option>
+                        <option value="event">Event / Conference</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="checkbox-group" style="margin-bottom:1.5rem">
+                    <label class="check-item" style="align-items:flex-start">
+                        <input type="checkbox" name="agree_terms" id="agree_terms" style="margin-top:2px">
+                        I agree to the <a href="#" style="color:var(--accent)">Terms &amp; Conditions</a> and <a
+                            href="#" style="color:var(--accent)">Privacy Policy</a>
+                    </label>
+                    <label class="check-item">
+                        <input type="checkbox" name="agree_marketing" id="agree_marketing">
+                        Receive marketing communications
+                    </label>
+                    <label class="check-item">
+                        <input type="checkbox" name="agree_data" id="agree_data">
+                        Allow data analytics for product improvement
+                    </label>
+                </div>
+
+                <div class="submit-area">
+                    <button type="reset" class="btn btn-ghost" id="btn-reset">Reset All</button>
+                    <button type="button" class="btn btn-ghost" id="btn-save-draft">Save as Draft</button>
+                    <button type="submit" class="btn btn-primary" id="btn-submit">Submit Application →</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Self-contained bundle (faker + UI, no module resolution needed) -->
+    <script src="./dist/browser.global.js"></script>
+
+    <script>
+        // Star rating
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+        stars.forEach(s => {
+            s.addEventListener('click', () => {
+                const v = Number(s.dataset.v);
+                ratingInput.value = v;
+                stars.forEach((st, i) => {
+                    st.classList.toggle('active', i < v);
+                });
+            });
+        });
+
+        // Update field-count in summary bar
+        function update_counts() {
+            const allInputs = document.querySelectorAll('#mega-form input:not([type="submit"]):not([type="hidden"]):not([type="reset"]), #mega-form textarea, #mega-form select');
+            const filled = Array.from(allInputs).filter(el => {
+                if (el.type === 'checkbox' || el.type === 'radio') return el.checked;
+                return el.value && el.value.trim() !== '';
+            });
+            document.getElementById('total-fields').textContent = allInputs.length;
+            document.getElementById('filled-fields').textContent = filled.length;
+        }
+
+        document.getElementById('mega-form').addEventListener('input', update_counts);
+        document.getElementById('mega-form').addEventListener('change', update_counts);
+        update_counts();
+
+        // Progress bar update
+        function update_progress() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((sec, i) => {
+                const ps = document.getElementById(`ps${i + 1}`);
+                if (!ps) return;
+                const fields = sec.querySelectorAll('input:not([type="hidden"]), textarea, select');
+                const filled = Array.from(fields).filter(el => {
+                    if (el.type === 'checkbox' || el.type === 'radio') return el.checked;
+                    return el.value && el.value.trim() !== '';
+                });
+                if (filled.length === 0) { ps.className = 'progress-step'; }
+                else if (filled.length >= fields.length / 2) { ps.className = 'progress-step done'; }
+                else { ps.className = 'progress-step active'; }
+            });
+        }
+
+        document.getElementById('mega-form').addEventListener('change', update_progress);
+        document.getElementById('mega-form').addEventListener('input', update_progress);
+
+        // Reset
+        document.getElementById('btn-reset').onclick = () => {
+            if (confirm('Reset all fields?')) { document.getElementById('mega-form').reset(); update_counts(); }
+        };
+
+        // Submit
+        document.getElementById('mega-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            const obj = Object.fromEntries(data.entries());
+            console.log('Form submitted:', obj);
+            alert('✅ Form submitted successfully! Check console for data.');
+        });
+    </script>
+</body>
+
+</html>
