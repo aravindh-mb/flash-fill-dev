@@ -1,6 +1,6 @@
 {
   "name": "@aravindh-arumugam/flash-fill",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.5",
   "description": "A developer-only form autofill helper with single-click full form fill.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
