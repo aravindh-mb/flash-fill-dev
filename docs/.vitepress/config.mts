@@ -32,7 +32,7 @@ export default defineConfig({
         ],
         footer: {
             message: 'Released under the MIT License.',
-            copyright: 'Copyright © 2025-present Aravindh Arumugam'
+            copyright: 'Copyright © 2026-present Aravindh Arumugam'
         }
     }
 })
