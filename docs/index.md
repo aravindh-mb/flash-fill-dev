@@ -3,26 +3,30 @@ layout: home
 
 hero:
   name: "Flash Fill ⚡"
-  text: "Global Form Intelligence"
-  tagline: "The world-class developer companion for intelligent, cross-border form testing."
+  text: "Mystic Form Intelligence"
+  tagline: "Wield the power of 100+ global data enchantments. The premier developer sorcery for instant form fulfillment."
   image:
-    src: /logo.png
+    src: /logo.svg
     alt: Flash Fill Logo
   actions:
     - theme: brand
-      text: Get Started
-      link: /matching
+      text: Get Started 🚀
+      link: /installation
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/aravindh-mb/flash-fill-dev
+      text: View Dictionary 📖
+      link: /MATCHING
 
 features:
-  - title: ⚡ Instant Filling
-    details: Detects all inputs and fills them with one click or keyboard shortcut.
-  - title: 🤖 100+ Intelligent Matchers
-    details: Automatically detects PAN, GST, IFSC, MICR, IBAN, and multi-country identities.
-  - title: 🛠 Dev-Only Safety
-    details: Zero footprint in production. Automatically disables itself in live builds.
-  - title: ⚛ React Ready
-    details: Includes first-class React hooks for custom integration.
+  - icon: ⚡
+    title: Instant Auto-Magic
+    details: Detects all form inputs and generates context-aware data with one click.
+  - icon: 🌍
+    title: Global Intelligence
+    details: World-class support for International Banking, Regional Tax IDs, and Logistics.
+  - icon: 🛡️
+    title: Dev-Safe Design
+    details: Zero footprint in production. Automatically deactivates in live environments.
+  - icon: ⚛️
+    title: React Optimized
+    details: First-class support for React hooks and synthetic event systems.
 ---

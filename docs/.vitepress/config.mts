@@ -4,8 +4,9 @@ export default defineConfig({
     base: '/flash-fill-dev/',
     title: "Flash Fill",
     description: "Intellegent Form Autofill for Developers",
+    head: [['link', { rel: 'icon', href: '/flash-fill-dev/logo.svg' }]],
     themeConfig: {
-        logo: '/logo.png',
+        logo: '/logo.svg',
         nav: [
             { text: 'Home', link: '/' },
             { text: 'Matching Guide', link: '/MATCHING' },
@@ -32,7 +33,7 @@ export default defineConfig({
         ],
         footer: {
             message: 'Released under the MIT License.',
-            copyright: 'Copyright © 2026-present Aravindh Arumugam'
+            copyright: 'Copyright © 2026-present <a href="https://github.com/aravindh-mb" target="_blank">Aravindh Arumugam</a>'
         }
     }
 })
