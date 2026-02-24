@@ -2,6 +2,8 @@
 
 A developer-only form autofill helper that intelligently detects form fields and allows single-click full form autofill. Powered by `@faker-js/faker`.
 
+[**Read Full Documentation →**](https://your-docs-site.com)
+
 ## Features
 
 - ⚡ **Single-Click Fill**: Instantly scan and autofill ALL form fields.

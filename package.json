@@ -1,6 +1,6 @@
 {
   "name": "@aravindh-arumugam/flash-fill",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "A developer-only form autofill helper with single-click full form fill.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -20,7 +20,10 @@
     "dev": "tsup src/index.ts --watch",
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --minify --external react",
     "build:browser": "tsup src/browser.ts --format iife --globalName FlashFill --outDir dist --minify --no-dts",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "repository": {
     "type": "git",
@@ -49,6 +52,8 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.29"
   }
 }

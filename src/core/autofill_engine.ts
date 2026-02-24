@@ -1042,26 +1042,34 @@ function resolve_value(
 
     if (matches(k, [
         'flight_number', 'flightnumber', 'flight_no', 'flightno',
+    ])) return `${faker.helpers.arrayElement(['AA', 'BA', 'EK', 'QF', 'SQ'])}${faker.number.int({ min: 100, max: 9999 })}`;
+
+    if (matches(k, [
         'airline', 'airline_name', 'carrier_name',
-    ])) return `AI${faker.string.numeric(4)}`;
+    ])) return faker.helpers.arrayElement(['American Airlines', 'British Airways', 'Emirates', 'Qantas', 'Singapore Airlines', 'Lufthansa', 'Cathay Pacific']);
 
     if (matches(k, [
-        'hotel_name', 'hotelname', 'accommodation', 'property_name',
-        'resort', 'lodge', 'inn',
-    ])) return `${faker.location.city()} Grand Hotel`;
+        'seat_number', 'seat_no', 'seat_num', 'boarding_gate', 'terminal',
+    ])) return `${faker.number.int({ min: 1, max: 50 })}${faker.helpers.arrayElement(['A', 'B', 'C', 'D', 'E', 'F'])}`;
+
+    // 15. Tech & Coding Environment
+    if (matches(k, [
+        'programming_language', 'coding_language', 'main_language',
+    ])) return faker.helpers.arrayElement(['JavaScript', 'TypeScript', 'Python', 'Go', 'Rust', 'Java', 'C++', 'Swift', 'Kotlin', 'PHP']);
 
     if (matches(k, [
-        'num_guests', 'number_of_guests', 'guests', 'pax',
-        'num_travelers', 'number_of_travelers', 'party_size',
-        'group_size', 'adults', 'children_count',
-    ])) return faker.number.int({ min: 1, max: 8 }).toString();
+        'ide', 'editor', 'code_editor',
+    ])) return faker.helpers.arrayElement(['VS Code', 'IntelliJ IDEA', 'PyCharm', 'Sublime Text', 'Vim', 'Neovim', 'WebStorm']);
 
     if (matches(k, [
-        'passport_expiry', 'passport_validity', 'visa_expiry',
-        'visa_validity', 'visa_type', 'visa_number', 'visanumber',
-    ])) return faker.date.future({ years: 5 }).toISOString().split('T')[0]!;
+        'framework', 'web_framework', 'tech_stack',
+    ])) return faker.helpers.arrayElement(['React', 'Next.js', 'Vue', 'Angular', 'Svelte', 'Express', 'Django', 'FastAPI', 'Spring Boot']);
 
-    // 15. Social & Content
+    if (matches(k, [
+        'version_control', 'vcs', 'git_platform',
+    ])) return faker.helpers.arrayElement(['GitHub', 'GitLab', 'Bitbucket', 'Azure DevOps']);
+
+    // 16. Social & Content
     if (matches(k, [
         'title', 'post_title', 'article_title', 'page_title',
         'blog_title', 'heading', 'headline', 'subject',
@@ -1099,7 +1107,24 @@ function resolve_value(
         'product_review', 'customer_review', 'opinion',
     ])) return faker.lorem.paragraph();
 
-    // 16. Large Text (Textareas)
+    // 17. Retail & Supply Chain
+    if (matches(k, [
+        'warranty_period', 'warranty_duration', 'guarantee_period',
+    ])) return `${faker.number.int({ min: 1, max: 5 })} Years`;
+
+    if (matches(k, [
+        'return_days', 'return_window',
+    ])) return `${faker.number.int({ min: 7, max: 90 })} Days`;
+
+    if (matches(k, [
+        'hs_code', 'hsn_code', 'tax_category',
+    ])) return faker.string.numeric(8);
+
+    if (matches(k, [
+        'origin_warehouse', 'warehouse_id', 'bin_location',
+    ])) return `WH-${faker.string.alphanumeric(4).toUpperCase()}-${faker.number.int({ min: 1, max: 50 })}`;
+
+    // 18. Large Text (Textareas)
     if (tag === 'textarea' || matches(k, [
         'bio', 'about', 'desc', 'summary', 'message', 'comment', 'feedback',
         'note', 'notes', 'remarks', 'remark', 'description', 'details',
