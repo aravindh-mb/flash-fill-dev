@@ -44,16 +44,30 @@ const init = () => {
     color: 0xffd700,
     wireframe: true,
     transparent: true,
-    opacity: 0.1,
+    opacity: 0.15,
     emissive: 0xffb700,
-    emissiveIntensity: 0.2
+    emissiveIntensity: 0.3
   })
   lightningMesh = new THREE.Mesh(orbGeometry, orbMaterial)
   scene.add(lightningMesh)
 
+  // Load Logo inside
+  const loader = new THREE.TextureLoader()
+  loader.load('/logo.svg', (texture) => {
+    const spriteMaterial = new THREE.SpriteMaterial({ 
+      map: texture, 
+      transparent: true,
+      opacity: 0.8,
+      color: 0xffd700
+    })
+    const sprite = new THREE.Sprite(spriteMaterial)
+    sprite.scale.set(0.8, 0.8, 1)
+    lightningMesh.add(sprite) // Add to mesh so it rotates/scales with it
+  })
+
   const innerOrb = new THREE.Mesh(
     new THREE.SphereGeometry(0.6, 32, 32),
-    new THREE.MeshBasicMaterial({ color: 0xffd700, transparent: true, opacity: 0.05 })
+    new THREE.MeshBasicMaterial({ color: 0xffd700, transparent: true, opacity: 0.1 })
   )
   scene.add(innerOrb)
 
