@@ -136,5 +136,13 @@
 }
 
 .dark body {
-    background: radial-gradient(circle at top right, #1a1a1a 0%, #000000 100%);
+    background: transparent !important;
+}
+
+.VPHome {
+    background: transparent !important;
+}
+
+.VPHero {
+    background: transparent !important;
 }
