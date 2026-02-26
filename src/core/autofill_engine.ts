@@ -1296,16 +1296,40 @@ function set_element_value(
 ) {
     const tag = el.tagName.toLowerCase();
 
-    if (type === 'color') {
-        (el as HTMLInputElement).value = value; // must be a valid #rrggbb hex
-        el.dispatchEvent(new Event('input', { bubbles: true }));
-        el.dispatchEvent(new Event('change', { bubbles: true }));
+    // Helper to bypass React/Vue/Svelte setters
+    const set_native_value = (element: HTMLElement, val: any, prop: string = 'value') => {
+        try {
+            const prototype = Object.getPrototypeOf(element);
+            const descriptor = Object.getOwnPropertyDescriptor(prototype, prop);
+            if (descriptor?.set) {
+                descriptor.set.call(element, val);
+            } else {
+                (element as any)[prop] = val;
+            }
+        } catch (e) {
+            (element as any)[prop] = val;
+        }
+    };
+
+    if (type === 'checkbox' || type === 'radio') {
+        const input = el as HTMLInputElement;
+        set_native_value(input, true, 'checked');
+        input.dispatchEvent(new Event('click', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
         return;
     }
 
-    if (type === 'checkbox') {
-        (el as HTMLInputElement).checked = true;
-        el.dispatchEvent(new Event('change', { bubbles: true }));
+    if (tag === 'select') {
+        const select = el as HTMLSelectElement;
+        const options = Array.from(select.options).filter(o => o.value !== '');
+        const match = options.find(o =>
+            o.value.toLowerCase() === value.toLowerCase() ||
+            o.text.toLowerCase() === value.toLowerCase()
+        );
+
+        const target_value = match ? match.value : (options[0]?.value ?? '');
+        set_native_value(select, target_value);
+        select.dispatchEvent(new Event('change', { bubbles: true }));
         return;
     }
 
@@ -1313,41 +1337,15 @@ function set_element_value(
         const input = el as HTMLInputElement;
         const min = Number(input.min) || 0;
         const max = Number(input.max) || 100;
-        input.value = String(Math.floor((min + max) / 2));
-        el.dispatchEvent(new Event('input', { bubbles: true }));
-        el.dispatchEvent(new Event('change', { bubbles: true }));
+        const range_val = value && !isNaN(Number(value)) ? value : String(Math.floor((min + max) / 2));
+        set_native_value(input, range_val);
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
         return;
     }
 
-    if (tag === 'select') {
-        const select = el as HTMLSelectElement;
-        const options = Array.from(select.options).filter(o => o.value !== '');
-        // Try to match by value or text
-        const match = options.find(o =>
-            o.value.toLowerCase() === value.toLowerCase() ||
-            o.text.toLowerCase() === value.toLowerCase()
-        );
-        if (match) {
-            select.value = match.value;
-        } else if (options.length > 0) {
-            // Pick a random valid option
-            const random = options[Math.floor(Math.random() * options.length)];
-            if (random) select.value = random.value;
-        }
-        el.dispatchEvent(new Event('change', { bubbles: true }));
-        return;
-    }
-
-    // Default text-like inputs
-    el.value = value;
+    // Default text-like inputs and textarea
+    set_native_value(el, value);
     el.dispatchEvent(new Event('input', { bubbles: true }));
     el.dispatchEvent(new Event('change', { bubbles: true }));
-    // React synthetic event support
-    try {
-        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
-        if (nativeInputValueSetter && tag === 'input') {
-            nativeInputValueSetter.call(el, value);
-            el.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-    } catch { }
 }

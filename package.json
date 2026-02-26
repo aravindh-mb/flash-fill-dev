@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "tsup src/index.ts --watch",
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean --minify --external react",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --minify --external react --external react-dom",
     "build:browser": "tsup src/browser.ts --format iife --globalName FlashFill --outDir dist --minify --no-dts",
     "lint": "tsc --noEmit",
     "docs:dev": "vitepress dev docs",
@@ -42,8 +42,8 @@
     "@faker-js/faker": "^9.5.0"
   },
   "peerDependencies": {
-    "react": ">=16",
-    "react-dom": ">=16"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.3.0",
