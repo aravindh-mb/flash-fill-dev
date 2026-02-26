@@ -28,5 +28,5 @@ features:
     details: Zero footprint in production. Automatically deactivates in live environments.
   - icon: ⚛️
     title: React Optimized
-    details: First-class support for React hooks and synthetic event systems.
+    details: Native support for React 16.8 through 19, including Strict Mode protection.
 ---

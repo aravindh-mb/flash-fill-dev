@@ -14,7 +14,7 @@ A developer-only form autofill helper that intelligently detects form fields and
   - Left-Click ⚡: Fill everything.
   - Right-Click/Long-Press ⚡: Open panel to edit values.
 - ⌨ **Keyboard Shortcut**: `Ctrl + Shift + F` for instant fill.
-- ⚛ **React Support**: Built-in hook `use_flash_fill`.
+- ⚛ **Hybrid Support**: Native React 16.8, 17, 18, and 19 support with built-in hook `use_flash_fill`.
 
 ## Installation
 

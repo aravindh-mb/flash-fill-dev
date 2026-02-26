@@ -10,6 +10,16 @@ Install the package as a development dependency:
 npm install --save-dev @aravindh-arumugam/flash-fill
 ```
 
+## Compatibility 🏛️
+
+Flash Fill is designed to be framework-agnostic but includes deep optimizations for React:
+
+- **React Support**: Fully compatible with **React 16.8+**, **React 17**, **React 18**, and **React 19**.
+- **Event Systems**: Support for React's Synthetic Event system (including React 19's updated event delegation).
+- **Control**: Works with both controlled and uncontrolled components.
+- **Strict Mode**: Built-in protection against double-execution in React 18/19 Strict Mode.
+- **Plain JS**: Works in any environment (Vite, Webpack, etc.) without React.
+
 ## Setup
 
 ### Vanilla JavaScript / Auto-Initialization
